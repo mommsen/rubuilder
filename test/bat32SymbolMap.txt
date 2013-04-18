@@ -1,0 +1,19 @@
+LAUNCHER_BASE_PORT 12222
+SOAP_BASE_PORT 65432
+I2O_BASE_PORT 54320
+
+EVM0_SOAP_HOST_NAME rubu-b3.tdrdemo
+RU0_SOAP_HOST_NAME rubu-b4.tdrdemo
+RU1_SOAP_HOST_NAME rubu-b5.tdrdemo
+BU0_SOAP_HOST_NAME rubu-b6.tdrdemo
+BU1_SOAP_HOST_NAME rubu-b4.tdrdemo
+FU0_SOAP_HOST_NAME rubu-b6.tdrdemo
+FU1_SOAP_HOST_NAME rubu-b4.tdrdemo
+
+EVM0_I2O_HOST_NAME rubu-b3.tdrdemo
+RU0_I2O_HOST_NAME rubu-b4.tdrdemo
+RU1_I2O_HOST_NAME rubu-b5.tdrdemo
+BU0_I2O_HOST_NAME rubu-b6.tdrdemo
+BU1_I2O_HOST_NAME rubu-b4.tdrdemo
+FU0_I2O_HOST_NAME rubu-b6.tdrdemo
+FU1_I2O_HOST_NAME rubu-b4.tdrdemo

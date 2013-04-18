@@ -1,0 +1,14 @@
+#!/bin/sh
+
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:BUEventNumber&fmt=plain"  | sed {s/.*/" BUEventNumber: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:BUOccupancy&fmt=plain"    | sed {s/.*/" BUOccupancy  : "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:BUPerformance&fmt=plain"  | sed {s/.*/" BUPerformance: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:BUStatus&fmt=plain"       | sed {s/.*/" BUStatus     : "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:EVMEventNumber&fmt=plain" | sed {s/.*/"EVMEventNumber: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:EVMOccupancy&fmt=plain"   | sed {s/.*/"EVMOccupancy  : "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:EVMPerformance&fmt=plain" | sed {s/.*/"EVMPerformance: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:EVMStatus&fmt=plain"      | sed {s/.*/"EVMStatus     : "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:RUEventNumber&fmt=plain"  | sed {s/.*/" RUEventNumber: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:RUOccupancy&fmt=plain"    | sed {s/.*/" RUOccupancy  : "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:RUPerformance&fmt=plain"  | sed {s/.*/" RUPerformance: "\&/}
+curl -s "http://monitor.cmsdaqpreseries:9991/urn:xdaq-application:lid=10/retrieveCollection?flash=urn:xdaq-flashlist:RUStatus&fmt=plain"       | sed {s/.*/" RUStatus     : "\&/}

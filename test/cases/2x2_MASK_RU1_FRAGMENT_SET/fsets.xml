@@ -1,0 +1,8 @@
+<FragmentSets>
+  <FragmentSetDef id="0" name="Just RU0">
+    <item value="0"/>
+  </FragmentSetDef>
+  <FragmentSetDef id="1" name="Just RU1">
+    <range minvalue="1" maxvalue="1"/>
+  </FragmentSetDef>
+</FragmentSets>

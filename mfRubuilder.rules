@@ -1,0 +1,68 @@
+# Common rules for all rubuilder packages
+
+BUILD_HOME:=$(shell pwd)/../../..
+
+include $(XDAQ_ROOT)/config/mfAutoconf.rules
+include $(XDAQ_ROOT)/config/mfDefs.$(XDAQ_OS)
+include $(XDAQ_ROOT)/config/mfDefs.extern_coretools
+include $(XDAQ_ROOT)/config/mfDefs.coretools
+include $(XDAQ_ROOT)/config/mfDefs.general_worksuite
+
+IncludeDirs = \
+	$(XERCES_INCLUDE_PREFIX) \
+	$(LOG4CPLUS_INCLUDE_PREFIX) \
+	$(ASYNCRESOLV_INCLUDE_PREFIX) \
+	$(CGICC_INCLUDE_PREFIX) \
+	$(CONFIG_INCLUDE_PREFIX) \
+	$(XCEPT_INCLUDE_PREFIX) \
+	$(LOG_UDPAPPENDER_INCLUDE_PREFIX) \
+	$(LOG_XMLAPPENDER_INCLUDE_PREFIX) \
+	$(XOAP_INCLUDE_PREFIX) \
+	$(XGI_INCLUDE_PREFIX) \
+	$(XGI_TOOLS_INCLUDE_PREFIX) \
+	$(XDATA_INCLUDE_PREFIX) \
+	$(TOOLBOX_INCLUDE_PREFIX) \
+	$(PT_INCLUDE_PREFIX) \
+	$(XDAQ_INCLUDE_PREFIX) \
+	$(I2O_INCLUDE_PREFIX) \
+	$(XI2O_UTILS_INCLUDE_PREFIX) \
+	$(XI2O_INCLUDE_PREFIX) \
+	$(XDAQ2RC_INCLUDE_PREFIX) \
+	$(INTERFACE_EVB_INCLUDE_PREFIX) \
+	$(INTERFACE_SHARED_INCLUDE_PREFIX) \
+	$(RUBUILDERUTILS_INCLUDE_PREFIX)
+
+UserCCFlags = -O3 -pedantic-errors -Wno-long-long # -Werror
+UserDynamicLinkFlags = -L$(RUBUILDERUTILS_LIB_PREFIX)
+
+# These libraries can be platform specific and
+# potentially need conditional processing
+
+ifneq ($(DynamicLibrary),rubuilderutils)
+DependentLibraries += rubuilderutils boost_system boost_filesystem
+endif
+ifeq ($(XDAQ_PLATFORM),x86_64_slc6)
+DependentLibraries += boost_thread-mt
+else
+DependentLibraries += boost_thread
+UserCCFlags += -DRUBUILDER_BOOST
+endif
+DependentLibraryDirs += /usr/lib
+
+include $(XDAQ_ROOT)/config/Makefile.rules
+
+############################### Rules for rpm building ###################################
+############### (One single rubuilder RPM is built in the rubuilder/Makefile) ##########
+
+.PHONY: _rpmall _cleanrpmall _changelogall _installrpmall
+_rpmall: _all
+	-mkdir -p ../lib/$(XDAQ_OS)/$(XDAQ_PLATFORM)
+	-mkdir -p ../include/rubuilder
+	cp lib/$(XDAQ_OS)/$(XDAQ_PLATFORM)/*.so ../lib/$(XDAQ_OS)/$(XDAQ_PLATFORM)
+	cp -r include/rubuilder/* ../include/rubuilder/
+
+
+# emacs configuration
+# Local Variables: -
+# mode: makefile -
+# End: -

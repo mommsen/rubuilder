@@ -1,0 +1,49 @@
+#!/bin/sh
+
+if test x${TESTS_DIR} = x
+then
+  echo "Error : TESTS_DIR has not been set - Aborting"
+  exit 1
+fi
+
+if test x${RESULTS_DIR} = x
+then
+  echo "Error : RESULTS_DIR has not been set - Aborting"
+  exit 1
+fi
+
+if test ! -e $TESTS_DIR
+then
+  echo "The directory $TESTS_DIR (value of TESTS_DIR) does not exist"
+  exit 1
+fi
+
+if test ! -d $TESTS_DIR
+then
+  echo "$TESTS_DIR (value of TESTS_DIR) is not a directory"
+  exit 1
+fi
+
+if test ! -e $RESULTS_DIR
+then
+  echo "The directory $RESULTS_DIR (value of RESULTS_DIR) does not exist"
+  exit 1
+fi
+
+if test ! -d $RESULTS_DIR
+then
+  echo "$RESULTS_DIR (value of RESULTS_DIR) is not a directory"
+  exit 1
+fi
+
+for TEST_NAME in `ls $TESTS_DIR | egrep "MISMATCH|TIMED_OUT" | grep -v SELF`; do
+  startTime=`date "+%H:%M:%S"`
+  printf "%-32s: $startTime " $TEST_NAME
+
+  if runTest $TEST_NAME > $RESULTS_DIR/$TEST_NAME
+  then
+    date "+%H:%M:%S Passed"
+  else
+    date "+%H:%M:%S FAILED"
+  fi
+done

@@ -1,0 +1,169 @@
+<xc:Partition xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xc="http://xdaq.web.cern.ch/xdaq/xsd/2004/XMLConfiguration-30" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+  <i2o:protocol xmlns:i2o="http://xdaq.web.cern.ch/xdaq/xsd/2004/I2OConfiguration-30">
+    <i2o:target class="rubuilder::evm::Application" instance="0" tid="11"/>
+    <i2o:target class="rubuilder::ru::Application"  instance="0" tid="21"/>
+    <i2o:target class="rubuilder::bu::Application"  instance="0" tid="31"/>
+  </i2o:protocol>
+
+  
+  <xc:Context url="http://EVM0_SOAP_HOST_NAME:EVM0_SOAP_PORT">
+    
+    <xc:Endpoint protocol="udapl" service="i2o" hostname="EVM0_I2O_HOST_NAME" port="EVM0_I2O_PORT" network="tcp" />
+    
+    <xc:Application class="pt::udapl::Application" id="10" network="tcp">
+      <properties xmlns="urn:xdaq-application:pt::udapl::Application" xsi:type="soapenc:Struct">
+        <iaName xsi:type="xsd:string">ofa-v2-ib0</iaName>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="rubuilder::evm::Application" id="13" instance="0" network="tcp">
+      <properties xmlns="urn:xdaq-application:rubuilder::evm::Application" xsi:type="soapenc:Struct">
+        <triggerSource xsi:type="xsd:string">Local</triggerSource>
+        <generateDummyTriggers xsi:type="xsd:boolean">true</generateDummyTriggers>
+        <usePlayback xsi:type="xsd:boolean">false</usePlayback>
+        <nbEvtIdsInBuilder xsi:type="xsd:unsignedInt">2048</nbEvtIdsInBuilder>
+        <I2O_RU_READOUT_Packing xsi:type="xsd:unsignedInt">128</I2O_RU_READOUT_Packing>
+        <I2O_TA_CREDIT_Packing xsi:type="xsd:unsignedInt">32</I2O_TA_CREDIT_Packing>
+      </properties>
+    </xc:Application>
+    
+    <xc:Module>/usr/lib64/libdat2.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libptudapl.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libxdaq2rc.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderevm.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderutils.so</xc:Module>
+    
+  </xc:Context>
+  
+  
+  
+  <xc:Context url="http://FEROL0_SOAP_HOST_NAME:FEROL0_SOAP_PORT">
+
+    <xc:Endpoint protocol="atcp" service="frl" hostname="FEROL0_FRL_HOST_NAME" port="FEROL0_FRL_PORT" network="fdr" sndTimeout="0" rcvTimeout="2000" affinity="RCV:W:*,SND:W:3,DSR:W:*,DSS:W:*" singleThread="true" pollingCycle="1000000" smode="poll"/>
+    
+    <xc:Application class="pt::utcp::Application" id="11" instance="0" network="fdr">
+      <properties xmlns="urn:xdaq-application:pt::utcp::Application" xsi:type="soapenc:Struct">
+        <maxClients xsi:type="xsd:unsignedInt">9</maxClients>
+        <autoConnect xsi:type="xsd:boolean">false</autoConnect>
+        <ioQueueSize xsi:type="xsd:unsignedInt">65536</ioQueueSize>
+        <eventQueueSize xsi:type="xsd:unsignedInt">65536</eventQueueSize>
+        <maxReceiveBuffers xsi:type="xsd:unsignedInt">1</maxReceiveBuffers>
+        <maxBlockSize xsi:type="xsd:unsignedInt">262144</maxBlockSize>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="evb::test::DummyFEROL" id="10" instance="0" network="fdr">
+      <xc:Unicast class="rubuilder::ru::Application" instance="0" network="fdr"/>
+      <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
+        <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="xmem::probe::Application" id="21" instance="0" network="local"/>
+
+    <xc:Module>$XDAQ_RUBUILDER/lib/libfrl2g.so</xc:Module> 
+    <xc:Module>$XDAQ_ROOT/lib/libptutcp.so</xc:Module>		
+    <xc:Module>$XDAQ_ROOT/lib/libxmemprobe.so</xc:Module>
+    <xc:Module>/nfshome0/mommsen/daq/dev/daq/evb/lib/linux/x86_64_slc6/libevb.so</xc:Module>
+    <xc:Module>/nfshome0/mommsen/daq/dev/daq/evb/lib/linux/x86_64_slc6/libevbtest.so</xc:Module>
+    
+  </xc:Context>
+  
+  
+  <xc:Context url="http://RU0_SOAP_HOST_NAME:RU0_SOAP_PORT">
+    
+    <xc:Endpoint protocol="atcp" service="frl" hostname="RU0_FRL_HOST_NAME" port="RU0_FRL_PORT" network="fdr" sndTimeout="2000" rcvTimeout="0" targetId="11" affinity="RCV:P:2,SND:W:*,DSR:P:6,DSS:W:*" singleThread="false" pollingCycle="1" rmode="select"  nonblock="true" datagramSize="131072"/>
+    <xc:Endpoint protocol="udapl" service="i2o" hostname="RU0_I2O_HOST_NAME" port="RU0_I2O_PORT" network="tcp"/>
+    
+    <xc:Application class="pt::utcp::Application" id="12" instance="1" network="fdr">
+      <properties xmlns="urn:xdaq-application:pt::utcp::Application" xsi:type="soapenc:Struct">
+        <maxClients xsi:type="xsd:unsignedInt">9</maxClients>
+        <autoConnect xsi:type="xsd:boolean">false</autoConnect>
+        <ioQueueSize xsi:type="xsd:unsignedInt">64</ioQueueSize>
+        <eventQueueSize xsi:type="xsd:unsignedInt">64</eventQueueSize>
+        <maxReceiveBuffers xsi:type="xsd:unsignedInt">8</maxReceiveBuffers>
+        <maxBlockSize xsi:type="xsd:unsignedInt">131072</maxBlockSize>
+        <frlMaxBlockSize xsi:type="xsd:unsignedInt">262144</frlMaxBlockSize>
+        <frli2oBlockSize xsi:type="xsd:unsignedInt">4096</frli2oBlockSize>
+        <frlStreamPoolSize xsi:type="xsd:double">5000000</frlStreamPoolSize>
+        <committedPoolSize xsi:type="xsd:double">20000000</committedPoolSize>
+        <frlRouting xsi:type="soapenc:Array" soapenc:arrayType="xsd:ur-type[1]">
+          <item xsi:type="soapenc:Struct" soapenc:position="[0]">
+            <fedid xsi:type="xsd:string">0</fedid>
+            <className xsi:type="xsd:string">rubuilder::ru::Application</className>
+            <instance xsi:type="xsd:string">0</instance>
+          </item>
+        </frlRouting>
+        <frlDispatcher xsi:type="xsd:string">copy</frlDispatcher>
+        <!--frlDispatcher xsi:type="xsd:string">copy</frlDispatcher>
+            <frlDispatcher xsi:type="xsd:string">zeroCopy</frlDispatcher-->
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="pt::udapl::Application" id="10" network="tcp">
+      <properties xmlns="urn:xdaq-application:pt::udapl::Application" xsi:type="soapenc:Struct">
+        <iaName xsi:type="xsd:string">ofa-v2-ib0</iaName>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="rubuilder::ru::Application" id="13" instance="0" network="tcp">
+      <properties xmlns="urn:xdaq-application:rubuilder::ru::Application" xsi:type="soapenc:Struct">
+        <inputSource xsi:type="xsd:string">FEROL</inputSource>
+        <generateDummySuperFragments xsi:type="xsd:boolean">false</generateDummySuperFragments>
+        <usePlayback xsi:type="xsd:boolean">false</usePlayback>
+        <dropInputData xsi:type="xsd:boolean">false</dropInputData>
+        <dummyBlockSize xsi:type="xsd:unsignedInt">258048</dummyBlockSize>
+        <dummyFedPayloadSize xsi:type="xsd:unsignedInt">256000</dummyFedPayloadSize>
+        <fedSourceIds soapenc:arrayType="xsd:ur-type[1]" xsi:type="soapenc:Array">
+          <item soapenc:position="[0]" xsi:type="xsd:unsignedInt">0</item>
+        </fedSourceIds>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="xmem::probe::Application" id="21" instance="0" network="local"/>
+    
+    <xc:Module>/usr/lib64/libdat2.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libptutcp.so</xc:Module>		
+    <xc:Module>$XDAQ_ROOT/lib/libptudapl.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/libfrl2g.so</xc:Module> 
+    <xc:Module>$XDAQ_ROOT/lib/libxmemprobe.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libxdaq2rc.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderutils.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderru.so</xc:Module>
+    
+  </xc:Context>
+  
+  
+  <xc:Context url="http://BU1_SOAP_HOST_NAME:BU1_SOAP_PORT">
+    
+    <xc:Endpoint protocol="udapl" service="i2o" hostname="BU1_I2O_HOST_NAME" port="BU1_I2O_PORT" network="tcp" />
+    
+    <xc:Application class="pt::udapl::Application" id="10" network="tcp">
+      <properties xmlns="urn:xdaq-application:pt::udapl::Application" xsi:type="soapenc:Struct">
+        <iaName xsi:type="xsd:string">ofa-v2-ib0</iaName>
+      </properties>
+    </xc:Application>
+    
+    <xc:Application class="rubuilder::bu::Application" id="12" instance="0" network="tcp">
+      <properties xmlns="urn:xdaq-application:rubuilder::bu::Application" xsi:type="soapenc:Struct">
+        <dropEventData xsi:type="xsd:boolean">true</dropEventData>
+	<writeEventsToDisk xsi:type="xsd:boolean">false</writeEventsToDisk>
+	<rawDataDir xsi:type="xsd:string">/tmp/ramdisk</rawDataDir>
+	<metaDataDir xsi:type="xsd:string">/tmp/ramdisk</metaDataDir>
+        <maxEvtsUnderConstruction xsi:type="xsd:unsignedInt">512</maxEvtsUnderConstruction>
+        <I2O_EVM_ALLOCATE_CLEAR_Packing xsi:type="xsd:unsignedInt">64</I2O_EVM_ALLOCATE_CLEAR_Packing>
+        <I2O_RU_SEND_Packing xsi:type="xsd:unsignedInt">128</I2O_RU_SEND_Packing>
+      </properties>
+    </xc:Application>
+    
+    <xc:Module>/usr/lib64/libdat2.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libxdaq2rc.so</xc:Module>
+    <xc:Module>$XDAQ_ROOT/lib/libptudapl.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderbu.so</xc:Module>
+    <xc:Module>$XDAQ_RUBUILDER/lib/librubuilderutils.so</xc:Module>
+    
+  </xc:Context>
+
+</xc:Partition>
+

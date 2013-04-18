@@ -1,0 +1,19 @@
+LAUNCHER_BASE_PORT 12222
+SOAP_BASE_PORT 65432
+I2O_BASE_PORT 54320
+
+EVM0_SOAP_HOST_NAME rubu1.cmsdaqpreseries
+RU0_SOAP_HOST_NAME rubu2.cmsdaqpreseries
+RU1_SOAP_HOST_NAME rubu3.cmsdaqpreseries
+BU0_SOAP_HOST_NAME rubu4.cmsdaqpreseries
+BU1_SOAP_HOST_NAME rubu6.cmsdaqpreseries
+FU0_SOAP_HOST_NAME rubu7.cmsdaqpreseries
+FU1_SOAP_HOST_NAME rubu8.cmsdaqpreseries
+
+EVM0_I2O_HOST_NAME rubu1.rbne1.cmsdaqpreseries
+RU0_I2O_HOST_NAME rubu2.rbne1.cmsdaqpreseries
+RU1_I2O_HOST_NAME rubu3.rbne1.cmsdaqpreseries
+BU0_I2O_HOST_NAME rubu4.rbne1.cmsdaqpreseries
+BU1_I2O_HOST_NAME rubu6.rbne1.cmsdaqpreseries
+FU0_I2O_HOST_NAME rubu7.rbne1.cmsdaqpreseries
+FU1_I2O_HOST_NAME rubu8.rbne1.cmsdaqpreseries
