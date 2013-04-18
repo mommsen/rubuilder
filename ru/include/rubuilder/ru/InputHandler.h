@@ -164,15 +164,13 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
 
   private:
     
-    void handleCompleteSuperFragment();
+    toolbox::mem::Reference* copyDataIntoDataBlock(SuperFragmentPtr);
+    void fillBlockInfo(toolbox::mem::Reference*, const utils::EvBid&, const uint32_t nbBlocks) const;
 
     SuperFragment::FEDlist fedList_;
     typedef std::map<utils::EvBid,SuperFragmentPtr> SuperFragmentMap;
     SuperFragmentMap superFragmentMap_;
     toolbox::mem::Pool* superFragmentPool_;
-    
-    toolbox::mem::Reference* copyDataIntoDataBlock(SuperFragmentPtr);
-    void fillBlockInfo(toolbox::mem::Reference*, const utils::EvBid&, const uint32_t nbBlocks) const;
     
     std::vector<utils::EvBidFactory> evbIdFactories_;
 
@@ -203,13 +201,10 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     void fillBlockInfo(toolbox::mem::Reference*, const utils::EvBid&, const uint32_t nbBlocks) const;
 
     typedef utils::OneToOneQueue<toolbox::mem::Reference*> FragmentFIFO;
-    //typedef boost::shared_ptr<FragmentFIFO> FragmentFIFOPtr;
     typedef std::map<uint16_t,FragmentFIFO> FedFragmentFIFOs;
     FedFragmentFIFOs fedFragmentFIFOs_;
     
     SuperFragment::FEDlist fedList_;
-    // typedef std::map<utils::EvBid,SuperFragmentPtr> SuperFragmentMap;
-    // SuperFragmentMap superFragmentMap_;
     toolbox::mem::Pool* superFragmentPool_;
     
     std::vector<utils::EvBidFactory> evbIdFactories_;

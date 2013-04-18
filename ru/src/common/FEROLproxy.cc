@@ -89,9 +89,8 @@ void rubuilder::ru::FEROLproxy::I2Ocallback(toolbox::mem::Reference* bufRef)
     SuperFragmentPtr superFragment( new SuperFragment(evbId,fedList_) );
     fragmentPos = superFragmentMap_.insert(fragmentPos, SuperFragmentMap::value_type(evbId,superFragment));
   }
-  const SuperFragmentPtr superFragment = fragmentPos->second;
   
-  if ( ! superFragment->append(fedId,bufRef) )
+  if ( ! fragmentPos->second->append(fedId,bufRef) )
   {
     // error condition
     std::stringstream msg;
@@ -121,11 +120,11 @@ void rubuilder::ru::FEROLproxy::I2Ocallback(toolbox::mem::Reference* bufRef)
     XCEPT_RAISE(exception::EventOrder, msg.str());
   }
   
-  if ( superFragment->isComplete() )
+  if ( fragmentPos->second->isComplete() )
   {
     if ( ! dropInputData_ )
     {
-      while ( ! blockFIFO_.enq(superFragment) ) ::usleep(1000);
+      while ( ! blockFIFO_.enq(fragmentPos->second) ) ::usleep(1000);
     }
     
     superFragmentMap_.erase(fragmentPos);
@@ -141,8 +140,7 @@ bool rubuilder::ru::FEROLproxy::getData
 {
   SuperFragmentPtr superFragment;
   if ( ! blockFIFO_.deq(superFragment) ) return false;
-
-  return false;
+  
   if ( superFragment->getEvBid() != evbId )
   {
     std::stringstream oss;

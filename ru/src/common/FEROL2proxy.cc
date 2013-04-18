@@ -148,12 +148,10 @@ toolbox::mem::Reference* rubuilder::ru::FEROL2proxy::getNextFragment(const utils
     else
       head = bufRef;
     
-    toolbox::mem::Reference* nextBufRef = bufRef;
-    
     do {
-      tail = nextBufRef;
-      nextBufRef = nextBufRef->getNextReference();
-    } while (nextBufRef);
+      tail = bufRef;
+      bufRef = bufRef->getNextReference();
+    } while (bufRef);
   }
 
   return head;

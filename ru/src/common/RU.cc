@@ -171,19 +171,6 @@ void rubuilder::ru::RU::startProcessingWorkLoop()
 bool rubuilder::ru::RU::process(toolbox::task::WorkLoop *wl)
 {
   processActive_ = true;
-  
-  //fix affinity to core 15
-  cpu_set_t cpuset;
-  CPU_ZERO(&cpuset);
-  CPU_SET(15, &cpuset);
-  const int status = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
-  if ( status != 0  )
-  {
-    std::ostringstream oss;
-    oss << "Failed to set affinity for workloop 'Processing': "
-      << strerror(status);
-    XCEPT_RAISE(exception::Configuration, oss.str());
-  }
 
   while (doProcessing_)
   {
