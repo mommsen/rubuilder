@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+*/src/linux
+*/x86_64*
+*rpm
+.svn
