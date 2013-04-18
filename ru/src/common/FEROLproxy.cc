@@ -79,7 +79,7 @@ void rubuilder::ru::FEROLproxy::I2Ocallback(toolbox::mem::Reference* bufRef)
   }
   
   const utils::EvBid evbId = evbIdFactories_[fedId].getEvBid(eventNumber);
-  std::cout << "**** got EvBid " << evbId << " from FED " << fedId << std::endl;
+  //std::cout << "**** got EvBid " << evbId << " from FED " << fedId << std::endl;
   //bufRef->release(); return;
 
   SuperFragmentMap::iterator fragmentPos = superFragmentMap_.lower_bound(evbId);
@@ -141,7 +141,8 @@ bool rubuilder::ru::FEROLproxy::getData
 {
   SuperFragmentPtr superFragment;
   if ( ! blockFIFO_.deq(superFragment) ) return false;
-  
+
+  return false;
   if ( superFragment->getEvBid() != evbId )
   {
     std::stringstream oss;
@@ -152,7 +153,7 @@ bool rubuilder::ru::FEROLproxy::getData
 
     XCEPT_RAISE(exception::MismatchDetected, oss.str());
   }
-
+  
   try
   {
     bufRef = copyDataIntoDataBlock(superFragment);

@@ -40,13 +40,12 @@ bool rubuilder::ru::SuperFragment::append
     head_ = bufRef;
   
   toolbox::mem::Reference* nextBufRef = bufRef;
-  while (nextBufRef)
-  {
+  do {
     tail_ = nextBufRef;
     size_ += nextBufRef->getDataSize() - sizeof(I2O_DATA_READY_MESSAGE_FRAME);
     nextBufRef = nextBufRef->getNextReference();
-  }
-
+  } while (nextBufRef);
+  
   return true;
 }
 
