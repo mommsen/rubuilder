@@ -151,7 +151,7 @@ bool rubuilder::ru::FEROLproxy::getData
 
     XCEPT_RAISE(exception::MismatchDetected, oss.str());
   }
-  
+
   try
   {
     bufRef = copyDataIntoDataBlock(superFragment);
@@ -170,14 +170,14 @@ bool rubuilder::ru::FEROLproxy::getData
 toolbox::mem::Reference* rubuilder::ru::FEROLproxy::copyDataIntoDataBlock(SuperFragmentPtr superFragment)
 {
 
-  // const size_t size = 8*superFragment->size_ + sizeof(I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME);
-  // toolbox::mem::Reference* head =
+  // const size_t size = superFragment->getSize() + sizeof(I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME);
+  // toolbox::mem::Reference* head2 =
   //   toolbox::mem::getMemoryPoolFactory()->getFrame(superFragmentPool_,size);
-  // head->setDataSize(size);
+  // head2->setDataSize(size);
  
-  // fillBlockInfo(head, superFragment->evbId_, 1);
+  // fillBlockInfo(head2, superFragment->getEvBid(), 1);
 
-  // return head;
+  // return head2;
 
   toolbox::mem::Reference* currentFragment = superFragment->head();
 

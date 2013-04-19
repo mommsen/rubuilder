@@ -391,22 +391,30 @@ namespace rubuilder { namespace utils
   inline 
   void OneToOneQueue<toolbox::mem::Reference*>::formatter(toolbox::mem::Reference*& element, std::ostringstream* out)
   {
-    I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME *block = 
-      (I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME*)element->getDataLocation();
-    if ( block )
+    try
     {
-      *out << "eventNumber="             << block->eventNumber             << " ";
-      *out << "resyncCount="             << block->resyncCount             << " ";
-      *out << "lumiSection="             << block->lumiSection             << " ";
-      *out << "runNumber="               << block->runNumber               << " ";
-      *out << "nbBlocksInSuperFragment=" << block->nbBlocksInSuperFragment << " ";
-      *out << "blockNb="                 << block->blockNb                 << " ";
-      *out << "buResourceId="            << block->buResourceId            << " ";
-      *out << "fuTransactionId="         << block->fuTransactionId         << " ";
-      *out << "nbSuperFragmentsInEvent=" << block->nbSuperFragmentsInEvent << " ";
-      *out << "superFragmentNb="         << block->superFragmentNb;
+      if ( element )
+      {
+        I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME *block = 
+          (I2O_EVENT_DATA_BLOCK_MESSAGE_FRAME*)element->getDataLocation();
+        
+        *out << "eventNumber="             << block->eventNumber             << " ";
+        *out << "resyncCount="             << block->resyncCount             << " ";
+        *out << "lumiSection="             << block->lumiSection             << " ";
+        *out << "runNumber="               << block->runNumber               << " ";
+        *out << "nbBlocksInSuperFragment=" << block->nbBlocksInSuperFragment << " ";
+        *out << "blockNb="                 << block->blockNb                 << " ";
+        *out << "buResourceId="            << block->buResourceId            << " ";
+        *out << "fuTransactionId="         << block->fuTransactionId         << " ";
+        *out << "nbSuperFragmentsInEvent=" << block->nbSuperFragmentsInEvent << " ";
+        *out << "superFragmentNb="         << block->superFragmentNb;
+      }
+      else
+      {
+        *out << "n/a";
+      }
     }
-    else
+    catch(...)
     {
       *out << "n/a";
     }
