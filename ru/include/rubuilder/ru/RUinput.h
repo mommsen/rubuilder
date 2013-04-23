@@ -112,8 +112,8 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     { handler_->printBlockFIFO(out); }
  
     /**
-    * 
-    */
+     * Enable or disable the handling of incoming I2O messages
+     */
     void acceptI2Omessages(const bool accept)
     { acceptI2Omessages_ = accept; }
 

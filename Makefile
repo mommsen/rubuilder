@@ -10,7 +10,7 @@ Description="This package contains the software of the CMS RUBuilder."
 Summary="CMS RUBuilder software"
 Link="http://cms-ru-builder.web.cern.ch/cms-ru-builder"
 PACKAGE_VER_MAJOR=5
-PACKAGE_VER_MINOR=3
+PACKAGE_VER_MINOR=4
 PACKAGE_VER_PATCH=0
 
 Packages= \

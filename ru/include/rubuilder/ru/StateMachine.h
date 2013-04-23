@@ -63,17 +63,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     toolbox::mem::Reference* bufRef_;
   };
 
-  class DataReady : public boost::statechart::event<DataReady> 
-  {
-  public:
-    DataReady(toolbox::mem::Reference* bufRef) : bufRef_(bufRef) {};
-
-    toolbox::mem::Reference* getDataReadyMsg() const { return bufRef_; };
-
-  private:
-    toolbox::mem::Reference* bufRef_;
-  };
-
   class EvmRuDataReady : public boost::statechart::event<EvmRuDataReady> 
   {
   public:
@@ -119,7 +108,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     void timedOutEvent(const TimedOut&);
     
     void ruReadout(toolbox::mem::Reference*);
-    void dataReady(toolbox::mem::Reference*);
     void evmRuDataReady(toolbox::mem::Reference*);
     void ruSend(toolbox::mem::Reference*);
 

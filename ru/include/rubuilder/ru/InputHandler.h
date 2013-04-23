@@ -172,7 +172,8 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     SuperFragmentMap superFragmentMap_;
     toolbox::mem::Pool* superFragmentPool_;
     
-    std::vector<utils::EvBidFactory> evbIdFactories_;
+    typedef std::map<uint16_t,utils::EvBidFactory> EvBidFactories;
+    EvBidFactories evbIdFactories_;
 
     typedef utils::OneToOneQueue<SuperFragmentPtr> BlockFIFO;
     BlockFIFO blockFIFO_;
@@ -207,7 +208,8 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     SuperFragment::FEDlist fedList_;
     toolbox::mem::Pool* superFragmentPool_;
     
-    std::vector<utils::EvBidFactory> evbIdFactories_;
+    typedef std::map<uint16_t,utils::EvBidFactory> EvBidFactories;
+    EvBidFactories evbIdFactories_;
 
     bool dropInputData_;
     uint32_t blockSize_;

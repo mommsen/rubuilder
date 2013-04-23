@@ -112,7 +112,7 @@ void rubuilder::ru::RUinput::clear()
 
 void rubuilder::ru::RUinput::appendConfigurationItems(utils::InfoSpaceItems& params)
 {
-  blockFIFOCapacity_ = 65535;
+  blockFIFOCapacity_ = 65536;
   inputSource_ = "FBO";
   dumpFragmentsToLogger_ = false;
   dropInputData_ = false;

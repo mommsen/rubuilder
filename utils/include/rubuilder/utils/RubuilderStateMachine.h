@@ -7,7 +7,6 @@
 #include "rubuilder/boost/statechart/state_machine.hpp"
 #include <boost/thread/mutex.hpp>
 #else
-#include <boost/pool/pool_alloc.hpp>
 #include <boost/statechart/event_base.hpp>
 #include <boost/statechart/state.hpp>
 #include <boost/statechart/state_machine.hpp>
@@ -67,7 +66,7 @@ namespace rubuilder { namespace utils { // namespace rubuilder::utils
   
   template< class MostDerived, class InitialState >
   class RubuilderStateMachine :
-    public boost::statechart::state_machine<MostDerived,InitialState,boost::fast_pool_allocator<MostDerived> >
+    public boost::statechart::state_machine<MostDerived,InitialState>
   {
     
   public:

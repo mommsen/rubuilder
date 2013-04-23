@@ -66,7 +66,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
 
     typedef boost::mpl::list<
     boost::statechart::custom_reaction<RuReadout>,
-    boost::statechart::custom_reaction<DataReady>,
     boost::statechart::custom_reaction<EvmRuDataReady>,
     boost::statechart::custom_reaction<RuSend>
     > reactions;
@@ -75,20 +74,12 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     { safeEntryAction(); }
     virtual ~Outermost()
     { safeExitAction(); }
-  
+
     inline boost::statechart::result react(const RuReadout& evt)
     {
       evt.getReadoutMsg()->release();
       LOG4CPLUS_WARN(outermost_context().getLogger(),
         "Discarding an I2O_RU_READOUT message.");
-      return discard_event();
-    }
-
-    inline boost::statechart::result react(const DataReady& evt)
-    {
-      evt.getDataReadyMsg()->release();
-      LOG4CPLUS_WARN(outermost_context().getLogger(),
-        "Discarding an I2O_DATA_READY message.");
       return discard_event();
     }
 
@@ -133,13 +124,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     {
       LOG4CPLUS_WARN(outermost_context().getLogger(),
         "Got an I2O_EVMRU_DATA_READY message in Failed state.");
-      return discard_event();
-    }
-    
-    inline boost::statechart::result react(const DataReady& evt)
-    {
-      LOG4CPLUS_WARN(outermost_context().getLogger(),
-        "Got an I2O_DATA_READY message in Failed state.");
       return discard_event();
     }
 
@@ -260,7 +244,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     typedef boost::mpl::list<
     boost::statechart::transition<utils::Stop,Configured>,
     boost::statechart::custom_reaction<RuReadout>,
-    boost::statechart::custom_reaction<DataReady>,
     boost::statechart::custom_reaction<EvmRuDataReady>,
     boost::statechart::custom_reaction<RuSend>
     > reactions;
@@ -275,12 +258,6 @@ namespace rubuilder { namespace ru { // namespace rubuilder::ru
     inline boost::statechart::result react(const RuReadout& evt)
     {
       outermost_context().ruReadout(evt.getReadoutMsg());
-      return discard_event();
-    }
-
-    inline boost::statechart::result react(const DataReady& evt)
-    {
-      outermost_context().dataReady(evt.getDataReadyMsg());
       return discard_event();
     }
 

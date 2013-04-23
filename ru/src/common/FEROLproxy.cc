@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "interface/shared/fed_header.h"
+#include "interface/shared/ferol_header.h"
 #include "interface/shared/i2ogevb2g.h"
 #include "rubuilder/ru/InputHandler.h"
 #include "rubuilder/utils/Constants.h"
@@ -56,12 +57,14 @@ void rubuilder::ru::FEROLproxy::I2Ocallback(toolbox::mem::Reference* bufRef)
   const uint64_t h1 = bswap_64(*((uint64_t*)(i2oPayloadPtr + 8)));	                       
 
   //const uint16_t signature = (h0 & 0xFFFF000000000000) >> 48;
-  const uint16_t header = (h0 & 0x00000000F0000000) >> 28;
+  //const uint16_t header = (h0 & 0x00000000F0000000) >> 28;
   //const uint64_t len = (h0 & 0x00000000000003ff) << 3;
-  const uint64_t fedId = (h1 & 0x0FFF000000000000) >> 48;
-  const uint64_t eventNumber = (h1 & 0x0000000000FFFFFF);
+  //const uint64_t fedId = (h1 & 0x0FFF000000000000) >> 48;
+  //const uint64_t eventNumber = (h1 & 0x0000000000FFFFFF);
+  const uint64_t fedId = FEROL_FEDID_EXTRACT(h1);
+  const uint64_t eventNumber = FEROL_EVENTNB_EXTRACT(h1);
   
-  // assert( signature == 0x475A );
+  //assert( FEROL_SIGNATURE_EXTRACT(h0) == FEROL_SIGNATURE );
 
   I2O_DATA_READY_MESSAGE_FRAME* frame =
     (I2O_DATA_READY_MESSAGE_FRAME*)bufRef->getDataLocation();
@@ -74,7 +77,7 @@ void rubuilder::ru::FEROLproxy::I2Ocallback(toolbox::mem::Reference* bufRef)
     inputMonitoring_.lastEventNumber = eventNumber;
     inputMonitoring_.payload += frame->totalLength;
     ++inputMonitoring_.i2oCount;
-    if ( header & 0x4 )
+    if ( FEROL_LASTPACKET_EXTRACT(h0) )
       ++inputMonitoring_.logicalCount;
   }
   
@@ -316,7 +319,6 @@ void rubuilder::ru::FEROLproxy::configure(const Configuration& conf)
   #endif
   
   evbIdFactories_.clear();
-  evbIdFactories_.resize(conf.fedSourceIds.size());
 }
 
 
@@ -326,9 +328,9 @@ void rubuilder::ru::FEROLproxy::clear()
   while ( blockFIFO_.deq(superFragment) ) {}
   
   superFragmentMap_.clear();
-  for ( std::vector<utils::EvBidFactory>::iterator it = evbIdFactories_.begin(), itEnd = evbIdFactories_.end();
+  for ( EvBidFactories::iterator it = evbIdFactories_.begin(), itEnd = evbIdFactories_.end();
         it != itEnd; ++it)
-    it->reset();
+    it->second.reset();
 }
 
 

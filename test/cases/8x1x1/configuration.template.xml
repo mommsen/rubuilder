@@ -58,6 +58,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">16</fedId>
       </properties>
     </xc:Application>
     
@@ -91,6 +92,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">17</fedId>
       </properties>
     </xc:Application>
     
@@ -124,6 +126,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">18</fedId>
       </properties>
     </xc:Application>
     
@@ -157,6 +160,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">19</fedId>
       </properties>
     </xc:Application>
     
@@ -190,6 +194,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">12</fedId>
       </properties>
     </xc:Application>
    
@@ -223,6 +228,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">13</fedId>
       </properties>
     </xc:Application>
     
@@ -256,6 +262,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">14</fedId>
       </properties>
     </xc:Application>
     
@@ -289,6 +296,7 @@
       <properties xmlns="urn:xdaq-application:evb::test::DummyFEROL" xsi:type="soapenc:Struct">
         <destinationInstance xsi:type="xsd:unsignedInt">0</destinationInstance>
         <frameSize xsi:type="xsd:unsignedInt">0x40000</frameSize>
+        <fedId xsi:type="xsd:unsignedInt">15</fedId>
       </properties>
     </xc:Application>
     
@@ -309,7 +317,7 @@
 
     <xc:Application class="pt::utcp::Application" id="12" instance="8" network="fdr">
       <properties xmlns="urn:xdaq-application:pt::utcp::Application" xsi:type="soapenc:Struct">
-        <maxClients xsi:type="xsd:unsignedInt">9</maxClients>
+        <maxClients xsi:type="xsd:unsignedInt">17</maxClients>
         <autoConnect xsi:type="xsd:boolean">false</autoConnect>
         <ioQueueSize xsi:type="xsd:unsignedInt">128</ioQueueSize>
         <eventQueueSize xsi:type="xsd:unsignedInt">128</eventQueueSize>
@@ -320,44 +328,51 @@
         <frli2oBlockSize xsi:type="xsd:unsignedInt">0x2000</frli2oBlockSize> <!-- 8192 bytes -->
         <frlStreamPoolSize xsi:type="xsd:double">5000000</frlStreamPoolSize>
         <committedPoolSize xsi:type="xsd:double">0x80</committedPoolSize>
-        <frlRouting xsi:type="soapenc:Array" soapenc:arrayType="xsd:ur-type[8]">
+        <!--frlRouting xsi:type="soapenc:Array" soapenc:arrayType="xsd:ur-type[8]">
           <item xsi:type="soapenc:Struct" soapenc:position="[0]">
-            <fedid xsi:type="xsd:string">0</fedid>
+            <fedid xsi:type="xsd:string">147</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[1]">
-            <fedid xsi:type="xsd:string">1</fedid>
+            <fedid xsi:type="xsd:string">145</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[2]">
-            <fedid xsi:type="xsd:string">2</fedid>
+            <fedid xsi:type="xsd:string">143</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[3]">
-            <fedid xsi:type="xsd:string">3</fedid>
+            <fedid xsi:type="xsd:string">141</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[4]">
-            <fedid xsi:type="xsd:string">4</fedid>
+            <fedid xsi:type="xsd:string">139</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[5]">
-            <fedid xsi:type="xsd:string">5</fedid>
+            <fedid xsi:type="xsd:string">137</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[6]">
-            <fedid xsi:type="xsd:string">6</fedid>
+            <fedid xsi:type="xsd:string">253</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
           <item xsi:type="soapenc:Struct" soapenc:position="[7]">
-            <fedid xsi:type="xsd:string">7</fedid>
+            <fedid xsi:type="xsd:string">251</fedid>
+            <className xsi:type="xsd:string">rubuilder::ru::Application</className>
+            <instance xsi:type="xsd:string">0</instance>
+          </item>
+        </frlRouting-->
+        <frlRouting xsi:type="soapenc:Array" soapenc:arrayType="xsd:ur-type[1]">
+          <item xsi:type="soapenc:Struct" soapenc:position="[0]">
+            <fedid xsi:type="xsd:string">0</fedid>
             <className xsi:type="xsd:string">rubuilder::ru::Application</className>
             <instance xsi:type="xsd:string">0</instance>
           </item>
@@ -384,6 +399,16 @@
         <dummyBlockSize xsi:type="xsd:unsignedInt">258048</dummyBlockSize>
         <dummyFedPayloadSize xsi:type="xsd:unsignedInt">256000</dummyFedPayloadSize>
         <fedSourceIds soapenc:arrayType="xsd:ur-type[8]" xsi:type="soapenc:Array">
+          <item soapenc:position="[0]" xsi:type="xsd:unsignedInt">16</item>
+          <item soapenc:position="[1]" xsi:type="xsd:unsignedInt">17</item>
+          <item soapenc:position="[2]" xsi:type="xsd:unsignedInt">18</item>
+          <item soapenc:position="[3]" xsi:type="xsd:unsignedInt">19</item>
+          <item soapenc:position="[4]" xsi:type="xsd:unsignedInt">12</item>
+          <item soapenc:position="[5]" xsi:type="xsd:unsignedInt">13</item>
+          <item soapenc:position="[6]" xsi:type="xsd:unsignedInt">14</item>
+          <item soapenc:position="[7]" xsi:type="xsd:unsignedInt">15</item>
+        </fedSourceIds>
+        <!--fedSourceIds soapenc:arrayType="xsd:ur-type[8]" xsi:type="soapenc:Array">
           <item soapenc:position="[0]" xsi:type="xsd:unsignedInt">0</item>
           <item soapenc:position="[1]" xsi:type="xsd:unsignedInt">1</item>
           <item soapenc:position="[2]" xsi:type="xsd:unsignedInt">2</item>
@@ -392,7 +417,7 @@
           <item soapenc:position="[5]" xsi:type="xsd:unsignedInt">5</item>
           <item soapenc:position="[6]" xsi:type="xsd:unsignedInt">6</item>
           <item soapenc:position="[7]" xsi:type="xsd:unsignedInt">7</item>
-        </fedSourceIds>
+        </fedSourceIds-->
       </properties>
     </xc:Application>
     

@@ -22,9 +22,6 @@ namespace rubuilder { namespace utils { // namespace rubuilder::utils
     
     EvBid(uint32_t resyncCount, uint32_t eventNumber)
     : resyncCount_(resyncCount), eventNumber_(eventNumber) {};
-    
-    EvBid(const EvBid& other)
-    : resyncCount_(other.resyncCount()), eventNumber_(other.eventNumber()) {};
 
     /**
      * Return the resync count

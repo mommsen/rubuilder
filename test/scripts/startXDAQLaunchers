@@ -4,6 +4,7 @@ use strict;
 
 my $testDir = $ENV{RUB_TESTER_HOME};
 my $symbolMap = $ENV{"TESTS_SYMBOL_MAP"};
+my $user = $ENV{"USER"};
 my $testEnv = "";
 $testEnv = "-" . $ENV{"TEST_TYPE"} if $ENV{"TEST_TYPE"};
 
@@ -26,7 +27,7 @@ while(<SYMBOL_MAP_FILE>) {
     my $sshCmd      = "ssh -x -n $host";
     my $launcherCmd = "cd /tmp && rm -f /tmp/core.* && source $testDir/setenv$testEnv.sh && xdaqLauncher $port";
     my $awkCmd      = "awk '{print \"$host:$port \" \$0}'";
-    my $cmd         = "$sshCmd \"sudo -u mommsen sh -c \\\"$launcherCmd\\\"\" | $awkCmd &";
+    my $cmd         = "$sshCmd \"sudo -u $user sh -c \\\"$launcherCmd\\\"\" | $awkCmd &";
 
     print "$cmd\n";
     system $cmd;

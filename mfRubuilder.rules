@@ -32,7 +32,7 @@ IncludeDirs = \
 	$(INTERFACE_SHARED_INCLUDE_PREFIX) \
 	$(RUBUILDERUTILS_INCLUDE_PREFIX)
 
-UserCCFlags = -O3 -pedantic-errors -Wno-long-long # -Werror
+UserCCFlags = -O3 -pedantic-errors -Wno-long-long -Werror
 UserDynamicLinkFlags = -L$(RUBUILDERUTILS_LIB_PREFIX)
 
 # These libraries can be platform specific and

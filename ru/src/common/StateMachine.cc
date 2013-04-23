@@ -81,37 +81,6 @@ void rubuilder::ru::StateMachine::ruReadout(toolbox::mem::Reference* bufRef)
 }
 
 
-void rubuilder::ru::StateMachine::dataReady(toolbox::mem::Reference* bufRef)
-{
-  std::string msg = "Failed to process I2O_DATA_READY";
-  try
-  {
-    ruInput_->I2Ocallback(bufRef);
-  }
-  catch( xcept::Exception& e )
-  {
-    XCEPT_DECLARE_NESTED(exception::I2O,
-      sentinelException, msg, e );
-    process_event( utils::Fail(sentinelException) );
-  }
-  catch( std::exception& e )
-  {
-    msg += ": ";
-    msg += e.what();
-    XCEPT_DECLARE(exception::I2O,
-      sentinelException, msg );
-    process_event( utils::Fail(sentinelException) );
-  }
-  catch(...)
-  {
-    msg += ": unknown exception";
-    XCEPT_DECLARE(exception::I2O,
-      sentinelException, msg );
-    process_event( utils::Fail(sentinelException) );
-  }
-}
-
-
 void rubuilder::ru::StateMachine::evmRuDataReady(toolbox::mem::Reference* bufRef)
 {
   std::string msg = "Failed to process I2O_EVMRU_DATA_READY";
